@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
-  has_one :user
+  belongs_to :user
   validates :content, presence: true, length: { maximum: 3000 }
 end

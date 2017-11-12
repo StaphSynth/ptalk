@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    @post = Post.new
   end
   
   def show
@@ -8,8 +9,10 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new(params[:user_id], params[:content])
+    @post = Post.new(post_params)
     @post.save!
+    
+    redirect_to action: :index
   end
   
   def update
@@ -18,5 +21,11 @@ class PostsController < ApplicationController
   
   def destroy
     Post.destroy(params[:id])
+  end
+  
+  private
+  
+  def post_params
+    params.require(:post).permit(:user_id, :content)
   end
 end

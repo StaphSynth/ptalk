@@ -1,0 +1,9 @@
+<ul class="post-list">
+  <% @posts.each_with_index do |post, i| %>
+    <li><%= render 'post', { post: post } %></li>
+  <% end %>
+</ul>
+
+<div>
+  <%= render 'form', { current_user: User.first } %>
+</div>
