@@ -1,6 +1,6 @@
 <ul class="post-list">
-  <% @posts.each_with_index do |post, i| %>
-    <li><%= render 'post', { post: post } %></li>
+  <% @posts.each do |post| %>
+    <li><%= render 'post', { post: post, current_user: @user } %></li>
   <% end %>
 </ul>
 
