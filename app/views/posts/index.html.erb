@@ -1,9 +1,11 @@
-<ul class="post-list">
-  <% @posts.each do |post| %>
-    <li><%= render 'post', { post: post, current_user: @user } %></li>
-  <% end %>
-</ul>
+<div class="posts-container">
+  <ul class="post-list">
+    <% @posts.each do |post| %>
+      <li><%= render 'post', { post: post, current_user: @user } %></li>
+    <% end %>
+  </ul>
 
-<div>
-  <%= render 'form', { current_user: User.first } %>
+  <div class="post-form">
+    <%= render 'form', { current_user: User.first } %>
+  </div>
 </div>
