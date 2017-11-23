@@ -1,7 +1,7 @@
 <div class="posts-container">
   <ul class="post-list">
-    <% @posts.each do |post| %>
-      <li><%= render 'post', { post: post, current_user: @user } %></li>
+    <% @messages.each do |message| %>
+      <li><%= render 'message', { message: message, current_user: @user } %></li>
     <% end %>
   </ul>
 
