@@ -1,28 +1,22 @@
 class ChannelsController < ApplicationController
-  before_action :set_channel, only: [:show, :edit, :update, :destroy]
+  before_action :channel, only: [:show, :edit, :update, :destroy]
 
-  # GET /channels
-  # GET /channels.json
   def index
     @channels = Channel.all
   end
 
-  # GET /channels/1
-  # GET /channels/1.json
   def show
+    @messages = channel.messages
+    @message = Message.new
   end
 
-  # GET /channels/new
   def new
     @channel = Channel.new
   end
 
-  # GET /channels/1/edit
   def edit
   end
 
-  # POST /channels
-  # POST /channels.json
   def create
     @channel = Channel.new(channel_params)
 
@@ -37,24 +31,20 @@ class ChannelsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /channels/1
-  # PATCH/PUT /channels/1.json
   def update
     respond_to do |format|
-      if @channel.update(channel_params)
-        format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
-        format.json { render :show, status: :ok, location: @channel }
+      if channel.update(channel_params)
+        format.html { redirect_to channel, notice: 'Channel was successfully updated.' }
+        format.json { render :show, status: :ok, location: channel }
       else
         format.html { render :edit }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
+        format.json { render json: channel.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /channels/1
-  # DELETE /channels/1.json
   def destroy
-    @channel.destroy
+    channel.destroy
     respond_to do |format|
       format.html { redirect_to channels_url, notice: 'Channel was successfully destroyed.' }
       format.json { head :no_content }
@@ -62,13 +52,12 @@ class ChannelsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_channel
-      @channel = Channel.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def channel_params
-      params.fetch(:channel, {})
-    end
+  def channel
+    @channel ||= Channel.find(params[:id])
+  end
+
+  def channel_params
+    params.fetch(:channel, {})
+  end
 end

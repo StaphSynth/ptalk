@@ -14,7 +14,8 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = user
     @message.save!
-    redirect_to action: :index
+    
+    redirect_to channel_path(message_params[:channel_id])
   end
 
   def edit
@@ -33,7 +34,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :channel_id)
   end
 
   def user

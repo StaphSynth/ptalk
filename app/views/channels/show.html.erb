@@ -1,4 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @channel.name %></h2>
 
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Back', channels_path %>
+<div class="messages-container">
+  <ul class="message-list">
+    <% @messages.each do |message| %>
+      <li>
+        <%= render 'message', message: message, user: message.user %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= render 'new_message', message: @message, channel: @channel %>
+</div>
