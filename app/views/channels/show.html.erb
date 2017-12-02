@@ -1,13 +1,9 @@
 <h2><%= @channel.name %></h2>
 
 <div class="messages-container">
-  <ul class="message-list">
-    <% @messages.each do |message| %>
-      <li>
-        <%= render 'message', message: message, user: message.user %>
-      </li>
-    <% end %>
-  </ul>
+  <div class="messages">
+    <%= render partial: 'messages/message', collection: @channel.messages %>
+  </div>
 
-  <%= render 'new_message', message: @message, channel: @channel %>
+  <%= render 'messages/form', message: @message, channel: @channel %>
 </div>

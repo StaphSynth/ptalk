@@ -2,20 +2,18 @@ class MessagesController < ApplicationController
   before_action :message, only: %i[show edit update destroy]
   before_action :user
 
-  def index
-    @messages = Message.all
-    @message = Message.new
-  end
-
-  def show
-  end
-
   def create
-    @message = Message.new(message_params)
-    @message.user = user
-    @message.save!
-    
-    redirect_to channel_path(message_params[:channel_id])
+    message = Message.new(message_params)
+    message.user = user
+    if message.save
+      ActionCable.server.broadcast 'messages',
+        message: message.content,
+        user: message.user.name
+      head :ok
+    else
+      redirect_to channels_path
+      flash[:error] = 'Oops, your message could not be sent. Try again later.'
+    end
   end
 
   def edit
@@ -34,7 +32,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:content, :channel_id)
+    params.require(:message).permit(:content, :channel_id, :user_id)
   end
 
   def user
