@@ -1,9 +1,9 @@
-<h2><%= @channel.name %></h2>
-
 <div class="messages-container">
+  <h2><%= @channel.name %></h2>
+
   <div class="messages">
     <%= render partial: 'messages/message', collection: @channel.messages %>
   </div>
 
-  <%= render 'messages/form', message: @message, channel: @channel %>
+  <%= render('messages/form', message: @message, channel: @channel) if current_user %>
 </div>

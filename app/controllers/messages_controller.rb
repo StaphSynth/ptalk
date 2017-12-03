@@ -4,7 +4,9 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.new(message_params)
+    message.content = ActionView::Base.full_sanitizer.sanitize message.content
     message.user = user
+    
     if message.save
       ActionCable.server.broadcast 'messages',
         message: message.content,
