@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   has_many :messages, dependent: :destroy
   has_many :channels, through: :messages
+  has_many :private_conversations
+  has_many :private_channels, through: :private_conversations, source: :channel
 
   validates :name, presence: true,
                   length: { maximum: 50 },
