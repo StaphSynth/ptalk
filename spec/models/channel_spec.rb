@@ -4,10 +4,11 @@ require 'rails_helper'
 RSpec.describe 'Channel', type: :model do
   let(:channel) { create(:channel) }
   subject { channel }
-  
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
+    it { should validate_length_of(:name) }
   end
 
   describe '#is_public?' do
