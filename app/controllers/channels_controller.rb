@@ -1,5 +1,6 @@
 class ChannelsController < ApplicationController
-  before_action :channel, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
+  before_action :channel, only: %i[show edit update destroy]
 
   def index
     @channels = Channel.all
