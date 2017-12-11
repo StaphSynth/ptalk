@@ -5,5 +5,5 @@
     <%= render partial: 'messages/message', collection: @channel.messages %>
   </div>
 
-  <%= render('messages/form', message: @message, channel: @channel) if current_user %>
+  <%= render('messages/form', message: @message, channel: @channel) %>
 </div>

@@ -1,0 +1,32 @@
+<%= form_for(channel) do |f| %>
+  <% if channel.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(channel.errors.count, 'error') %> prohibited your channel from being created:</h3>
+      <ul>
+      <% channel.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, 'Channel name:' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :public %>
+  </div>
+
+  <div class="form-group">
+    <%= f.check_box :public, default: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Create' %>
+  </div>
+<% end %>

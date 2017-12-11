@@ -1,4 +1,5 @@
 class Channel < ApplicationRecord
+  belongs_to :user
   has_many :messages, dependent: :destroy
   has_many :contributors, through: :messages, source: :user
   has_many :private_conversations

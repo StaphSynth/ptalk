@@ -19,16 +19,13 @@ class ChannelsController < ApplicationController
   end
 
   def create
-    @channel = Channel.new(channel_params)
+    new_params = channel_params.merge({ user_id: current_user.id })
+    @channel = Channel.new(new_params)
 
-    respond_to do |format|
-      if @channel.save
-        format.html { redirect_to @channel, notice: 'Channel was successfully created.' }
-        format.json { render :show, status: :created, location: @channel }
-      else
-        format.html { render :new }
-        format.json { render json: @channel.errors, status: :unprocessable_entity }
-      end
+    if @channel.save
+      redirect_to channel_path(@channel)
+    else
+      render :new
     end
   end
 
@@ -59,6 +56,6 @@ class ChannelsController < ApplicationController
   end
 
   def channel_params
-    params.fetch(:channel, {})
+    params.require(:channel).permit(:id, :public, :name)
   end
 end
