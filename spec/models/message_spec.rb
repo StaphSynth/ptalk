@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe 'Message', type: :model do
   let(:user) { create(:user) }
-  let(:channel) { create(:channel) }
+  let(:channel) { create(:channel, user_id: user.id) }
   let(:message) { create(:message, user_id: user.id, channel_id: channel.id) }
   subject { message }
 

@@ -2,7 +2,8 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe 'Channel', type: :model do
-  let(:channel) { create(:channel) }
+  let(:user) { create(:user) }
+  let(:channel) { create(:channel, user_id: user.id) }
   subject { channel }
 
   describe 'validations' do

@@ -4,7 +4,7 @@ require 'clearance/rspec'
 
 describe ChannelsController, type: :controller do
   let(:user) { create(:user) }
-  let(:channel) { create(:channel, owner: user.id) }
+  let(:channel) { create(:channel, user_id: user.id) }
 
   describe '#index' do
     subject { get :index }
