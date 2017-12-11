@@ -11,6 +11,10 @@ class Channel < ApplicationRecord
                   case_sensitive: false
 
   def is_public?
-    self.public
+    !private
+  end
+
+  def is_private?
+    private
   end
 end

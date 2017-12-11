@@ -3,7 +3,7 @@ require 'faker'
 FactoryBot.define do
   factory :channel do
     name Faker::Name.name
-    public true
+    private false
   end
 
   factory :user do

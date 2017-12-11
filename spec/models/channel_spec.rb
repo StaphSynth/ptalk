@@ -12,11 +12,17 @@ RSpec.describe 'Channel', type: :model do
     it { should validate_length_of(:name) }
   end
 
+  describe '#is_private?' do
+    it 'should return the value of the private param' do
+      expect(channel.is_private?).to be(false)
+      channel.update!(private: true)
+      expect(channel.reload.is_private?).to be(true)
+    end
+  end
+
   describe '#is_public?' do
-    it 'should return the value of the public param' do
-      expect(channel.is_public?).to be(true)
-      channel.update!(public: false)
-      expect(channel.reload.is_public?).to be(false)
+    it 'should return the inverse of the private param' do
+      expect(channel.is_public?).to eq(!channel.is_private?)
     end
   end
 end
