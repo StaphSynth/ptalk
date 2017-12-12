@@ -1,4 +1,7 @@
 class Channel < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+  
   belongs_to :user
   has_many :messages, dependent: :destroy
   has_many :contributors, through: :messages, source: :user
