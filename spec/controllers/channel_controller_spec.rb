@@ -39,6 +39,17 @@ describe ChannelsController, type: :controller do
         subject
         expect(response).to be_successful
       end
+
+      describe 'when trying to access unauthorized private channel' do
+        let(:user_2) { create(:user) }
+        let(:private_channel) { create(:channel, user_id: user_2.id, private: true) }
+
+        it 'redirects to :index' do
+          get :show, params: { id: private_channel.id }
+          expect(response).not_to be_successful
+          expect(response.status).to eq(302)
+        end
+      end
     end
 
     context 'When not logged in' do
