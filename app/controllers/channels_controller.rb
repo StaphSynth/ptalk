@@ -1,9 +1,12 @@
 class ChannelsController < ApplicationController
   before_action :require_login
   before_action :channel, only: %i[show edit update destroy]
+  before_action :can_contribute, only: [:show]
 
   def index
-    @channels = Channel.all
+    @channels = Channel.all.select do |channel|
+      channel.authorized_contributor?(current_user)
+    end
   end
 
   def show
@@ -50,6 +53,10 @@ class ChannelsController < ApplicationController
   end
 
   private
+
+  def can_contribute
+    redirect_to action: :index unless channel.authorized_contributor?(current_user)
+  end
 
   def channel
     @channel ||= Channel.find(params[:id])

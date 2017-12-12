@@ -17,4 +17,9 @@ class Channel < ApplicationRecord
   def is_private?
     private
   end
+
+  def authorized_contributor?(user)
+    is_public? || user == self.user ||
+    private_contributors.include?(user)
+  end
 end

@@ -25,4 +25,36 @@ RSpec.describe 'Channel', type: :model do
       expect(channel.is_public?).to eq(!channel.is_private?)
     end
   end
+
+  describe '#authorized_contributor?' do
+    let(:friendly_user) { create(:user) }
+    let(:unfriendly_user) { create(:user) }
+
+    context 'When channel set to private' do
+
+      before do
+        channel.update!(private: true)
+        channel.reload
+      end
+
+      it 'allows its owner' do
+        expect(channel.authorized_contributor?(user)).to be(true)
+      end
+
+      it 'only allows authorized private contributors' do
+        channel.private_contributors << friendly_user
+
+        expect(channel.authorized_contributor?(friendly_user)).to be(true)
+        expect(channel.authorized_contributor?(unfriendly_user)).to be(false)
+      end
+    end
+
+    context 'When channel set to public' do
+      it 'allows all users' do
+        expect(channel.authorized_contributor?(user)).to be(true)
+        expect(channel.authorized_contributor?(friendly_user)).to be(true)
+        expect(channel.authorized_contributor?(unfriendly_user)).to be(true)
+      end
+    end
+  end
 end
