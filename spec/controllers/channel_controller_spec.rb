@@ -20,7 +20,7 @@ describe ChannelsController, type: :controller do
     end
 
     context 'When not logged in' do
-      it 'responds 302 forbidden' do
+      it 'redirects to sign_in page' do
         subject
         expect(response).not_to be_successful
         expect(response.status).to be(302)
@@ -53,7 +53,7 @@ describe ChannelsController, type: :controller do
     end
 
     context 'When not logged in' do
-      it 'returns 302 forbidden' do
+      it 'redirects to sign_in page' do
         subject
         expect(response).not_to be_successful
         expect(response.status).to be(302)

@@ -19,7 +19,7 @@ describe UsersController, type: :controller do
     end
 
     describe 'When not logged-in' do
-      it 'it responds 302 forbidden' do
+      it 'redirects to sign_in page' do
         subject
         expect(response).not_to be_successful
         expect(response.status).to be(302)
@@ -41,7 +41,7 @@ describe UsersController, type: :controller do
     end
 
     describe 'When not logged-in' do
-      it 'responds 302 forbidden' do
+      it 'redirects to sign_in page' do
         subject
         expect(response).not_to be_successful
         expect(response.status).to be(302)
