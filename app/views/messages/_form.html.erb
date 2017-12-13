@@ -1,7 +1,7 @@
-<%= form_for(@message, remote: true) do |f| %>
+<%= form_for(message, remote: true) do |f| %>
 
   <%= f.hidden_field :user_id, value: current_user.id if current_user %>
-  <%= f.hidden_field :channel_id, value: @channel.id %>
+  <%= f.hidden_field :channel_id, value: channel.id %>
 
   <div class="form-group">
     <%= f.label :content, 'Type your message here:' %>

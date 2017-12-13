@@ -236,6 +236,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.7)
   rails (~> 5.1.4)
+  rails-html-sanitizer
   redis (~> 3.0)
   rspec-rails (~> 3.6)
   sass-rails (~> 5.0)
