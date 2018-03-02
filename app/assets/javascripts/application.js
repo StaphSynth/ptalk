@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require action_cable
+//= require selectize
 //= require_tree ./channels
 //= require_tree .

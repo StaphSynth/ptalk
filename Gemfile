@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'redis', '~> 3.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'rails-html-sanitizer'
+gem 'selectize-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'faker'
   gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do

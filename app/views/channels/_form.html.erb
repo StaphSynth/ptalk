@@ -26,7 +26,25 @@
     <%= f.check_box :private, {}, 'true', 'false' %>
   </div>
 
+  <%= f.fields_for :private_conversations do |ff| %>
+    <div class="form-group">
+      <%= ff.label :user_id, 'private contributors' %>
+    </div>
+
+    <div class="form-group selectize">
+      <div style="max-width: 300px;">
+        <%= ff.select :user_id, generate_private_options(users), { include_hidden: false }, { multiple: true } %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-group">
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Submit' %>
   </div>
 <% end %>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('.selectize select').selectize({ maxItems: null });
+  });
+</script>
